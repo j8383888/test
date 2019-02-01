@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Dictionaries>
+		<Dictionary From="E:\开 发\bw\Document\版本效验\Tool\I18N\Language\GA\output_before.txt" To="E:\开 发\bw\Document\版本效验\Tool\I18N\Language\GA\output_final.txt" />
+		<Dictionary From="E:\开 发\bw\Document\版本效验\Tool\I18N\Language\Thai\output_before.txt" To="E:\开 发\bw\Document\版本效验\Tool\I18N\Language\Thai\output_final.txt" />
+	</Dictionaries>
+	<Replacement>
+		<Dictionary From="E:\开 发\bw\Document\版本效验\Tool\I18N\Language\Corpus\Replace.txt" To="E:\开 发\bw\Document\版本效验\Tool\I18N\Language\Corpus\Replace.en.txt" />
+	</Replacement>
+	<TaskPathBase From="E:\开 发\thai" To="E:\开 发\thai-泰语" />
+	<Tasks>
+		<Task xsi:type="TextTask" Name="客户端代码翻译" Path="Client2.5D" Encoding="Utf8">
+			<PathFilter>
+				<Match Options="IgnoreCase, Compiled" Pattern="\.(h|cpp)$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\\.svn\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\runclient\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\ArchiveTest\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\BaseLibTest\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\CompressModuleTest\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\HugemanClientTest\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\BWTable\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\PluginBase\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\Start\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\BWPlugin2\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\Doc\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\npbwplugin2\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Client2\.5D\\Start\\" />
+			</PathFilter>
+			<LineFilter>
+				<Ignore Options="Compiled" Pattern="\[bw_i18n_ignore\]" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*//" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*/\*.*\*/\s*$" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*\W(AssertFatal|Assert|assert|TRACE|BWTRACE|Engine_WriteLogF|Engine_WriteLogV|Release_WriteLogF|(OutputDebugString[AW]?))\(" />
+				<Ignore Options="Compiled" Pattern="^(\s*(\* )+\\)?(brief|param|return|version|author|date|time|purpose)\s" />
+			</LineFilter>
+		</Task>
+		<Task xsi:type="TextTask" Name="客户端xml翻译" Path="Client2.5D\runclient" Encoding="Utf8">
+			<PathFilter>
+				<Match Options="IgnoreCase, Compiled" Pattern="\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\\.svn\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\runclient\\data\\cegui\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\runclient\\data\\gui\\imageinfo\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\filters_chat\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\filters_name\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\shengming0\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\shengming1\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\books\\helplist\.xml$" />
+			</PathFilter>
+			<LineFilter>
+				<Ignore Options="Compiled" Pattern="\[bw_i18n_ignore\]" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*\&lt;!-{2}" />
+			</LineFilter>
+		</Task>
+		<Task xsi:type="TextTask" Name="服务器代码翻译" Path="Duckweed" Encoding="Utf8NoBOM">
+			<PathFilter>
+				<Match Options="IgnoreCase, Compiled" Pattern="\.(h|cpp)$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\\.svn\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\font_8x16\.h$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Duckweed\\3Party\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Duckweed\\common\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Duckweed\\docs\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="Duckweed\\table\\" />
+			</PathFilter>
+			<LineFilter>
+				<Ignore Options="Compiled" Pattern="\[bw_i18n_ignore\]" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*//" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*/\*.*\*/\s*$" />
+				<Ignore Options="Compiled" Pattern="^(\s*(\* )+\\)?(brief|param|return|version|author|date|time|purpose)\s" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*\W(error|info|warn|fatal|errorm|debug|trace|assert)\(" />
+			</LineFilter>
+		</Task>
+		<Task xsi:type="TextTask" Name="服务器xml配置文件翻译" Path="Duckweed" Encoding="Utf8NoBOM">
+			<PathFilter>
+				<Match Options="IgnoreCase, Compiled" Pattern="\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\\.svn\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\imageinfo\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\filters_name\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\filters_chat\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\aitable\.xml$" />
+			</PathFilter>
+			<LineFilter>
+				<Ignore Options="Compiled" Pattern="\[bw_i18n_ignore\]" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*\&lt;!-{2}" />
+			</LineFilter>
+		</Task>
+		<Task xsi:type="TextTask" Name="服务器lua翻译" Path="Duckweed\script" Encoding="Utf8NoBOM">
+			<PathFilter>
+				<Match Options="IgnoreCase, Compiled" Pattern="\.lua$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\\.svn\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\variable\.lua$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\define\.lua$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\valueType\.lua$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\taskType\.lua$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\item\.lua$" />
+			</PathFilter>
+			<LineFilter>
+				<Ignore Options="Compiled" Pattern="\[bw_i18n_ignore\]" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*-{2}" />
+				<Ignore Options="Compiled" Pattern="\W(s_debug)\(" />
+				<Ignore Options="Compiled" Pattern="\W(s_error)\(" />
+				<Ignore Options="Compiled" Pattern="\W(s_errorm)\(" />
+			</LineFilter>
+		</Task>
+		<Task xsi:type="TextTask" Name="common代码翻译" Path="common" Encoding="Utf8">
+			<PathFilter>
+				<Match Options="IgnoreCase, Compiled" Pattern="\.(h|cpp)$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\\.svn\\" />
+			</PathFilter>
+			<LineFilter>
+				<Ignore Options="Compiled" Pattern="\[bw_i18n_ignore\]" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*//" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*/\*.*\*/\s*$" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*\W(AssertFatal|Assert|assert|TRACE|BWTRACE|Engine_WriteLogF|Engine_WriteLogV|Release_WriteLogF|(OutputDebugString[AW]?))\(" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*\W(error|info|warn|fatal|errorm|debug|trace|assert)\(" />
+				<Ignore Options="Compiled" Pattern="^(\s*(\* )+\\)?(brief|param|return|version|author|date|time|purpose)\s" />
+			</LineFilter>
+		</Task>
+		<Task xsi:type="TextTask" Name="策划xml配置文件翻译" Path="Document\版本效验\配置文件" Encoding="Utf8NoBOM">
+			<PathFilter>
+				<Match Options="IgnoreCase, Compiled" Pattern="\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\\.svn\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\imageinfo\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\filters_name\.xml$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\filters_chat\.xml$" />
+			</PathFilter>
+			<LineFilter>
+				<Ignore Options="Compiled" Pattern="\[bw_i18n_ignore\]" />
+				<Ignore Options="Compiled" Pattern="^[^\u4e00-\u9fa5\u3001-\u303f]*\&lt;!-{2}" />
+			</LineFilter>
+		</Task>
+		<Task xsi:type="ExcelTask" Name="Excel表格翻译" Path="Document\版本效验\表格">
+			<RowFilter>
+				<Filter Filename="道具基本表" Sheet="Sheet1" Column="需要等级" MaxLevel="21" />
+				<Filter Filename="任务基本表" Sheet="Sheet1" Column="最低等级" MaxLevel="21" />
+				<Filter Filename="技能表" Sheet="Sheet1" Column="人物等级" MaxLevel="21" />
+			</RowFilter>
+			<PathFilter>
+				<Match Options="IgnoreCase, Compiled" Pattern="\.xls[xm]?$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\\.svn\\" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="~\$" />
+				<Ignore Options="IgnoreCase, Compiled" Pattern="\\首字母表\.xlsm$" />
+			</PathFilter>
+		</Task>
+	</Tasks>
+</Config>

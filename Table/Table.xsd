@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+	attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="table" type="table" />
+
+  <xs:complexType name="table">
+    <xs:sequence>
+      <!-- 一个表格配置文件可以包含多个output节点 -->
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="output" type="output" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="output">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="key" type="key" />
+      <xs:element maxOccurs="unbounded" name="field" type="field" />
+    </xs:sequence>
+    <!--excel文件的位置，支持相对路径-->
+    <xs:attribute name="file" type="xs:string" use="required" />
+    <!--excel所在的表单-->
+    <xs:attribute name="sheet" type="xs:string" use="required" />
+    <!--支持同时配置多种输出方式，以“|”分隔即可-->
+    <xs:attribute name="type" type="xs:string" use="required" />
+    <!--代码生成的类名称，默认为sheet值-->
+    <xs:attribute name="code" type="xs:string" use="optional" />
+    <!--用于output节点限定表格的条目数-->
+    <xs:attribute name="count" type="xs:positiveInteger" use="optional" />
+    <!--输出数据的编码-->
+    <xs:attribute name="encoding.data" type="xs:string" use="optional" />
+    <!--生成代码的编码-->
+    <xs:attribute name="encoding.code" type="xs:string" use="optional" />
+    <!--输出数据的文件名，如"{0}.json"，不指定则采用缺省方案-->
+    <xs:attribute name="filename.data" type="xs:string" use="optional" />
+    <!--生成代码的文件名，如"{0}.cs"，不指定则采用缺省方案-->
+    <xs:attribute name="filename.code" type="xs:string" use="optional" />
+    <!--用于某些语言(C#)生成特定的属性-->
+    <xs:attribute name="attribute" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <!--支持的打表输出类型-->
+  <xs:simpleType name="output_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="console" />
+      <xs:enumeration value="json" />
+      <xs:enumeration value="json-unity" />
+      <xs:enumeration value="json-go" />
+      <xs:enumeration value="lua-module" />
+      <xs:enumeration value="lua-return" />
+      <xs:enumeration value="lua-table" />
+      <xs:enumeration value="python" />
+      <xs:enumeration value="protobuf" />
+      <xs:enumeration value="tbl" />
+      <xs:enumeration value="tbl2" />
+      <xs:enumeration value="mysql" />
+      <xs:enumeration value="mongo" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="key">
+    <xs:attribute name="code" type="xs:string" use="required" />
+    <!--mul修饰该key的“值”，支持16进制或2进制的配置方式-->
+    <xs:attribute name="mul" type="xs:string" use="optional" />
+    <!--用于某些语言(C#)生成特定的属性-->
+    <xs:attribute name="attribute" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="field">
+    <xs:sequence minOccurs="0">
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="replace" type="regex_replace" />
+      <xs:element maxOccurs="1" minOccurs="0" name="regex" type="xs:string" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="key" type="key" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="embed_field" />
+    </xs:sequence>
+    <!--代码生成的字段名称，默认为column值-->
+    <xs:attribute name="code" type="xs:string" use="optional" />
+    <xs:attribute name="type" type="field_type" use="required" />
+    <!--用于field节点限定数组的元素个数-->
+    <xs:attribute name="count" type="xs:positiveInteger" use="optional" />
+    <!--定长字符串的字节数-->
+    <xs:attribute name="size" type="xs:positiveInteger" use="optional" />
+    <!--excel表格中的列名称，代码生成的字段注释-->
+    <xs:attribute name="column" type="xs:string" use="required" />
+    <xs:attribute name="default" type="xs:string" use="optional" />
+    <!--用于某些语言(C#)生成特定的属性-->
+    <xs:attribute name="attribute" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <!--字段类型-->
+  <xs:simpleType name="field_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="bool" />
+      <xs:enumeration value="int8" />
+      <xs:enumeration value="uint8" />
+      <xs:enumeration value="int16" />
+      <xs:enumeration value="uint16" />
+      <xs:enumeration value="int32" />
+      <xs:enumeration value="uint32" />
+      <xs:enumeration value="int64" />
+      <xs:enumeration value="uint64" />
+      <xs:enumeration value="float" />
+      <xs:enumeration value="double" />
+      <xs:enumeration value="string" />
+      <xs:enumeration value="object" />
+      <xs:enumeration value="array" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--object或array的复杂字段类型-->
+  <xs:complexType name="embed_field">
+    <xs:sequence minOccurs="0">
+      <xs:element maxOccurs="1" minOccurs="0" name="regex" type="xs:string" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="key" type="key" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="embed_field" />
+    </xs:sequence>
+    <!--代码生成的字段注释-->
+    <xs:attribute name="column" type="xs:string" use="optional" />
+    <!--代码生成的字段名称，默认为column值-->
+    <xs:attribute name="code" type="xs:string" use="optional" />
+    <xs:attribute name="type" type="field_type" use="required" />
+    <!--用于field节点限定数组的元素个数-->
+    <xs:attribute name="count" type="xs:positiveInteger" use="optional" />
+    <!--用于某些语言(C#)生成特定的属性-->
+    <xs:attribute name="attribute" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <!--替换表格中的字面值-->
+  <xs:complexType name="regex_replace">
+    <xs:attribute name="from" type="xs:string" use="required" />
+    <xs:attribute name="to" type="xs:string" use="required" />
+    <xs:attribute name="options" type="xs:string" use="optional" />
+  </xs:complexType>
+</xs:schema>
